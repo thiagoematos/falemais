@@ -1,0 +1,244 @@
+databaseChangeLog:
+  - changeSet:
+      id: create hibernate_sequence
+      author: thiagoematos
+      changes:
+        - createSequence:
+            sequenceName: hibernate_sequence
+            startValue: 5
+  - changeSet:
+      id: Tabela para armazenar os DDDs
+      author: thiagoematos
+      changes:
+        - createTable:
+            tableName: ddd
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: ddd_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: code
+                  type: VARCHAR(3)
+  - changeSet:
+      id: Tabela para armazenar as tarifas
+      author: thiagoematos
+      changes:
+        - createTable:
+            tableName: rate
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: rate_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: value
+                  type: DOUBLE
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: origin_fk
+                    references: DDD(id)
+                  name: origin
+                  type: int
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: destiny_fk
+                    references: DDD(id)
+                  name: destiny
+                  type: int
+  - changeSet:
+      id: Tabela para armazenar os Planos
+      author: thiagoematos
+      changes:
+        - createTable:
+            tableName: plan
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: plan_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: minutes
+                  type: int
+  - changeSet:
+      id: Inserir dados iniciais na tabela de DDDs
+      author: thiagoematos
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: code
+                  value: '011'
+            tableName: ddd
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: code
+                  value: '016'
+            tableName: ddd
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: code
+                  value: '017'
+            tableName: ddd
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: code
+                  value: '018'
+            tableName: ddd
+  - changeSet:
+      id: Inserir dados iniciais na tabela de Tarifas
+      author: thiagoematos
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: origin
+                  value: 1
+              - column:
+                  name: destiny
+                  value: 2
+              - column:
+                  name: value
+                  value: 1.9
+            tableName: rate
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: origin
+                  value: 2
+              - column:
+                  name: destiny
+                  value: 1
+              - column:
+                  name: value
+                  value: 2.9
+            tableName: rate
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: origin
+                  value: 1
+              - column:
+                  name: destiny
+                  value: 3
+              - column:
+                  name: value
+                  value: 1.7
+            tableName: rate
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: origin
+                  value: 3
+              - column:
+                  name: destiny
+                  value: 1
+              - column:
+                  name: value
+                  value: 2.7
+            tableName: rate
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: origin
+                  value: 1
+              - column:
+                  name: destiny
+                  value: 4
+              - column:
+                  name: value
+                  value: 0.9
+            tableName: rate
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: origin
+                  value: 4
+              - column:
+                  name: destiny
+                  value: 1
+              - column:
+                  name: value
+                  value: 1.9
+            tableName: rate
+  - changeSet:
+      id: Inserir dados iniciais na tabela de Planos
+      author: thiagoematos
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: minutes
+                  value: 30
+            tableName: plan
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: minutes
+                  value: 60
+            tableName: plan
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: minutes
+                  value: 120
+            tableName: plan

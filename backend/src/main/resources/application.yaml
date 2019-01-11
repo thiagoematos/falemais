@@ -1,0 +1,16 @@
+server:
+  port: 8280
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://${postgres.hostname:localhost}:${postgres.port:5432}/falemais
+    driver-class-name: org.postgresql.Driver
+    username: ${postgres.user:postgres}
+    password: ${postgres.password:postgres}
+  jpa:
+    properties.hibernate.jdbc.lob.non_contextual_creation: true
+    show-sql: true
+    properties.hibernate.format_sql: true
